@@ -1,0 +1,29 @@
+﻿<Window x:Class="CoinMarketCapApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:localcontrol="clr-namespace:CoinMarketCapApp.Controls" 
+        xmlns:viewmodels="clr-namespace:CoinMarketCapApp.ViewModels" 
+        mc:Ignorable="d"
+        Title="Crypto Market App" Height="520" Width="800">
+    <StackPanel  Margin="10">
+        <DataGrid ItemsSource="{Binding PagedCoins.Items}" Name="coinDataGrid" AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="名称" Width="Auto" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="价格" Width="Auto" Binding="{Binding Price}" />
+                <DataGridTextColumn Header="代码符号" Width="Auto" Binding="{Binding Symbol}" />
+                <DataGridTextColumn Header="添加时间" Width="Auto" Binding="{Binding LaunchedDate, StringFormat='yyyy-MM-dd HH:mm:ss'}">
+                    <!--<DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Tag" Value="LaunchedDate" />
+                            <Setter Property="Command" Value="{Binding DataContext.SortCommand, ElementName=coinDataGrid}" />
+                            <Setter Property="CommandParameter" Value="LaunchedDate" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>-->
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <localcontrol:PaginationControl DataContext="{Binding CryptoMarketViewModel}" Margin="0,5,0,0" />
+    </StackPanel>
+</Window>

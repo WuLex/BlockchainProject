@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoinMarketCapApp", "CoinMarketCapApp\CoinMarketCapApp.csproj", "{3B580799-2898-4564-8BC5-26722F17DBC2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoinmarketcapClient", "CoinmarketcapClient\CoinmarketcapClient.csproj", "{E0744621-2261-4EF1-B4F2-128FEC5F96DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B580799-2898-4564-8BC5-26722F17DBC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B580799-2898-4564-8BC5-26722F17DBC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B580799-2898-4564-8BC5-26722F17DBC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B580799-2898-4564-8BC5-26722F17DBC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0744621-2261-4EF1-B4F2-128FEC5F96DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0744621-2261-4EF1-B4F2-128FEC5F96DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0744621-2261-4EF1-B4F2-128FEC5F96DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0744621-2261-4EF1-B4F2-128FEC5F96DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F5A894F4-161E-4552-967B-71F1F2C8EAB1}
+	EndGlobalSection
+EndGlobal
