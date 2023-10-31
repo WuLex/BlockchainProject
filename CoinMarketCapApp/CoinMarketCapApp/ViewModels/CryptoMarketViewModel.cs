@@ -77,7 +77,7 @@ namespace CoinMarketCapApp.ViewModels
         // 加载数据的方法
         private void LoadData()
         {
-            ICoinmarketcapClient client = new CoinmarketcapClient("41947fa6-bfb7-******-*****-f316cfd33db3"); // 使用 Coinmarketcap 客户端
+            ICoinmarketcapClient client = new CoinmarketcapClient("41947fa6-****-****-****-f316cfd33db3"); // 使用 Coinmarketcap 客户端
 
             //指定要返回的结果数。使用此参数和“start”参数来确定您自己的分页大小。
             //默认是100,最大值为5000
@@ -91,6 +91,7 @@ namespace CoinMarketCapApp.ViewModels
                         Name = cryptoData.Name,
                         Price = cryptoData.Price,
                         Symbol = cryptoData.Symbol,
+                        CmcRank= Convert.ToInt32(cryptoData.Rank.Trim()??"-1"),
                         LaunchedDate = cryptoData.DateAdded // 假设 API 响应中有 DateAdded 属性
                     };
 
@@ -227,13 +228,23 @@ namespace CoinMarketCapApp.ViewModels
                         {
                             ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Data");
 
+                            // 添加列头
+                            worksheet.Cells[1, 1].Value = "名称";
+                            worksheet.Cells[1, 2].Value = "价格";
+                            worksheet.Cells[1, 3].Value = "市值排名";
+                            worksheet.Cells[1, 4].Value = "代码符号";
+                            worksheet.Cells[1, 5].Value = "添加时间";
+                            // 设置列头字体加粗
+                            worksheet.Cells[1, 1, 1, 5].Style.Font.Bold = true;
+
                             // 添加数据到工作表
                             for (int i = 0; i < Coins.Count; i++)
                             {
                                 worksheet.Cells[i + 2, 1].Value = Coins[i].Name;
                                 worksheet.Cells[i + 2, 2].Value = Coins[i].Price;
-                                worksheet.Cells[i + 2, 3].Value = Coins[i].Symbol;
-                                worksheet.Cells[i + 2, 4].Value = Coins[i].LaunchedDate.ToString("yyyy-MM-dd HH:mm:ss");
+                                worksheet.Cells[i + 2, 3].Value = Coins[i].CmcRank;
+                                worksheet.Cells[i + 2, 4].Value = Coins[i].Symbol;
+                                worksheet.Cells[i + 2, 5].Value = Coins[i].LaunchedDate.ToString("yyyy-MM-dd HH:mm:ss");
                                 // 添加更多属性
                             }
 

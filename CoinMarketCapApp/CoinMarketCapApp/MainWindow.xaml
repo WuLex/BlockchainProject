@@ -7,12 +7,13 @@
         xmlns:viewmodels="clr-namespace:CoinMarketCapApp.ViewModels" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="Crypto Market App" Height="580" Width="800">
+        Title="Crypto Market App" Height="600" Width="800">
     <StackPanel  Margin="10">
         <DataGrid ItemsSource="{Binding PagedCoins.Items}" Name="coinDataGrid" AutoGenerateColumns="False" CanUserSortColumns="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="名称" Width="Auto" Binding="{Binding Name}" SortMemberPath="Name"/>
                 <DataGridTextColumn Header="价格" Width="Auto" Binding="{Binding Price}" SortMemberPath="Price"/>
+                <DataGridTextColumn Header="市值排名" Width="Auto" Binding="{Binding CmcRank}" SortMemberPath="CmcRank"/>
                 <DataGridTextColumn Header="代码符号" Width="Auto" Binding="{Binding Symbol}" SortMemberPath="Symbol"/>
                 <DataGridTextColumn Header="添加时间" Width="Auto" Binding="{Binding LaunchedDate, StringFormat='yyyy-MM-dd HH:mm:ss'}" SortMemberPath="LaunchedDate">
                     <!--<DataGridTextColumn.HeaderStyle>
