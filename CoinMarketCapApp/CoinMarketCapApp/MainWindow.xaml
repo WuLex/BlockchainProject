@@ -5,15 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:localcontrol="clr-namespace:CoinMarketCapApp.Controls" 
         xmlns:viewmodels="clr-namespace:CoinMarketCapApp.ViewModels" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="Crypto Market App" Height="520" Width="800">
+        Title="Crypto Market App" Height="580" Width="800">
     <StackPanel  Margin="10">
-        <DataGrid ItemsSource="{Binding PagedCoins.Items}" Name="coinDataGrid" AutoGenerateColumns="False" >
+        <DataGrid ItemsSource="{Binding PagedCoins.Items}" Name="coinDataGrid" AutoGenerateColumns="False" CanUserSortColumns="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="名称" Width="Auto" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="价格" Width="Auto" Binding="{Binding Price}" />
-                <DataGridTextColumn Header="代码符号" Width="Auto" Binding="{Binding Symbol}" />
-                <DataGridTextColumn Header="添加时间" Width="Auto" Binding="{Binding LaunchedDate, StringFormat='yyyy-MM-dd HH:mm:ss'}">
+                <DataGridTextColumn Header="名称" Width="Auto" Binding="{Binding Name}" SortMemberPath="Name"/>
+                <DataGridTextColumn Header="价格" Width="Auto" Binding="{Binding Price}" SortMemberPath="Price"/>
+                <DataGridTextColumn Header="代码符号" Width="Auto" Binding="{Binding Symbol}" SortMemberPath="Symbol"/>
+                <DataGridTextColumn Header="添加时间" Width="Auto" Binding="{Binding LaunchedDate, StringFormat='yyyy-MM-dd HH:mm:ss'}" SortMemberPath="LaunchedDate">
                     <!--<DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="Tag" Value="LaunchedDate" />
@@ -23,7 +24,16 @@
                     </DataGridTextColumn.HeaderStyle>-->
                 </DataGridTextColumn>
             </DataGrid.Columns>
+            <!--<i:Interaction.Triggers>
+                <i:EventTrigger EventName="Sorting">
+                    --><!--<i:InvokeCommandAction Command="{Binding SortCommand}"   CommandParameter="{Binding Path=Column.SortMemberPath, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridColumn}}}" />-->
+                    <!--<i:InvokeCommandAction Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=coinDataGrid, Path=Column.SortMemberPath}" />-->
+                    <!--<i:InvokeCommandAction Command="{Binding SortCommand}" CommandParameter="{Binding Path=Column.SortMemberPath, RelativeSource={RelativeSource Self}}"  />--><!--
+                    <i:InvokeCommandAction Command="{Binding SortCommand}" CommandParameter="LaunchedDate"  />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>-->
         </DataGrid>
         <localcontrol:PaginationControl DataContext="{Binding CryptoMarketViewModel}" Margin="0,5,0,0" />
+        <Button Width="200" Content="导出Excel" Cursor="Hand" Command="{Binding ExportToExcelCommand}" Margin="0,5,0,0" />
     </StackPanel>
 </Window>

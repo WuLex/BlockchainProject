@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net48;net60</TargetFrameworks>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <IncludeSymbols>True</IncludeSymbols>
     <PackageVersion>3.0.0</PackageVersion>
     <title>Coinmarketcap Client</title>
@@ -22,6 +22,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BouncyCastle.NetCore" Version="2.2.1" />
     <PackageReference Include="FubarCoder.RestSharp.Portable.HttpClient" Version="4.0.8" />
   </ItemGroup>
 
@@ -29,6 +30,8 @@
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities">
       <Version>2.2.0</Version>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Text.Json" Version="7.0.3" />
   </ItemGroup>
 
 </Project>

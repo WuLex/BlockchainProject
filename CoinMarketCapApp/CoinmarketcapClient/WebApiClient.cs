@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
@@ -34,6 +35,7 @@ namespace NoobsMuc.Coinmarketcap.Client
             List<Currency> currencyList = new List<Currency>();
             if (!isSymbol)
             {
+                 
                 GetNonSymbolData(convert, oneItemonly, content, currencyList);
             }
             else

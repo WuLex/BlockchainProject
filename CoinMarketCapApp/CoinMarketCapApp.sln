@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoinMarketCapApp", "CoinMar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoinmarketcapClient", "CoinmarketcapClient\CoinmarketcapClient.csproj", "{E0744621-2261-4EF1-B4F2-128FEC5F96DD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{7B023397-5776-4142-9427-2C5C4B2E2927}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Newtonsoft.Json", "..\..\..\test\Newtonsoft.Json\Src\Newtonsoft.Json\Newtonsoft.Json.csproj", "{6A2F0948-752D-464C-BD1E-76DF83701EC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{E0744621-2261-4EF1-B4F2-128FEC5F96DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0744621-2261-4EF1-B4F2-128FEC5F96DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0744621-2261-4EF1-B4F2-128FEC5F96DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B023397-5776-4142-9427-2C5C4B2E2927}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B023397-5776-4142-9427-2C5C4B2E2927}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B023397-5776-4142-9427-2C5C4B2E2927}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B023397-5776-4142-9427-2C5C4B2E2927}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A2F0948-752D-464C-BD1E-76DF83701EC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A2F0948-752D-464C-BD1E-76DF83701EC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A2F0948-752D-464C-BD1E-76DF83701EC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A2F0948-752D-464C-BD1E-76DF83701EC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
