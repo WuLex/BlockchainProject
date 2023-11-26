@@ -1,57 +1,73 @@
 ﻿using BlockChainAlgorithmProject.Common.DAGAlg;
 
 #region DAG算法实例
-// 模拟并发的区块
-List<Block> concurrentBlocks1 = new List<Block>
-        {
-            new Block(new List<Transaction> { new Transaction("Tx1"), new Transaction("Tx2") }),
-            new Block(new List<Transaction> { new Transaction("Tx3"), new Transaction("Tx4") })
-        };
+//// 模拟并发的区块
+//List<Block> concurrentBlocks1 = new List<Block>
+//        {
+//            new Block(new List<Transaction> { new Transaction("Tx1"), new Transaction("Tx2") }),
+//            new Block(new List<Transaction> { new Transaction("Tx3"), new Transaction("Tx4") })
+//        };
 
-List<Block> concurrentBlocks2 = new List<Block>
-        {
-            new Block(new List<Transaction> { new Transaction("Tx5"), new Transaction("Tx6") }),
-            new Block(new List<Transaction> { new Transaction("Tx7"), new Transaction("Tx8") })
-        };
+//List<Block> concurrentBlocks2 = new List<Block>
+//        {
+//            new Block(new List<Transaction> { new Transaction("Tx5"), new Transaction("Tx6") }),
+//            new Block(new List<Transaction> { new Transaction("Tx7"), new Transaction("Tx8") })
+//        };
 
-// 创建两棵树
-TreeNode tree1 = new TreeNode(concurrentBlocks1[0]);
-TreeNode tree2 = new TreeNode(concurrentBlocks2[0]);
+//// 创建两棵树
+//TreeNode tree1 = new TreeNode(concurrentBlocks1[0]);
+//TreeNode tree2 = new TreeNode(concurrentBlocks2[0]);
 
-// 将并发的区块加入树中
-foreach (var block in concurrentBlocks1.Skip(1))
-{
-    tree1.Children.Add(new TreeNode(block));
-}
+//// 将并发的区块加入树中
+//foreach (var block in concurrentBlocks1.Skip(1))
+//{
+//    tree1.Children.Add(new TreeNode(block));
+//}
 
-foreach (var block in concurrentBlocks2.Skip(1))
-{
-    tree2.Children.Add(new TreeNode(block));
-}
+//foreach (var block in concurrentBlocks2.Skip(1))
+//{
+//    tree2.Children.Add(new TreeNode(block));
+//}
 
-// 合并两棵树
-TreeNode mergedTree = DAGSimulation.MergeTree(tree1, tree2);
+//// 合并两棵树
+//TreeNode mergedTree = DAGSimulation.MergeTree(tree1, tree2);
 
-// 输出合并后的树结构
-Console.WriteLine("合并后的树:");
-Console.WriteLine("根区块交易:");
+//// 输出合并后的树结构
+//Console.WriteLine("合并后的树:");
+//Console.WriteLine("根区块交易:");
 
-foreach (var transaction in mergedTree.Block.Transactions)
-{
-    Console.WriteLine(transaction.TransactionData);
-}
+//foreach (var transaction in mergedTree.Block.Transactions)
+//{
+//    Console.WriteLine(transaction.TransactionData);
+//}
 
-Console.WriteLine("子区块:");
+//Console.WriteLine("子区块:");
 
-foreach (var child in mergedTree.Children)
-{
-    Console.WriteLine("子区块交易:");
-    foreach (var transaction in child.Block.Transactions)
-    {
-        Console.WriteLine(transaction.TransactionData);
-    }
-}
+//foreach (var child in mergedTree.Children)
+//{
+//    Console.WriteLine("子区块交易:");
+//    foreach (var transaction in child.Block.Transactions)
+//    {
+//        Console.WriteLine(transaction.TransactionData);
+//    }
+//}
 
 
 #endregion
+
+#region Scrypt是一种用于密码学安全目的的哈希函数，旨在提供对抗特定类型的攻击，尤其是硬件攻击。
+// 示例1: 使用Scrypt进行密码哈希
+string password = "signking";
+string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password, BCrypt.Net.BCrypt.GenerateSalt());
+
+Console.WriteLine($"Password: {password}");
+Console.WriteLine($"Hashed Password: {hashedPassword}");
+
+// 示例2: 验证密码
+string userInputPassword = "signking";
+bool passwordMatches = BCrypt.Net.BCrypt.Verify(userInputPassword, hashedPassword);
+
+Console.WriteLine($"Password Matches: {passwordMatches}");
+#endregion
+
 Console.ReadKey();
