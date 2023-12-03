@@ -1,0 +1,85 @@
+﻿// using System;
+// using System.Collections.Generic;
+// using System.Linq;
+// using System.Text;
+// using System.Threading.Tasks;
+
+// namespace BlockChainAlgorithmProject.Common.DoublePayment
+// {
+    // public class Blockchain
+    // {
+        // private List<Block> chain;
+
+        // public Blockchain()
+        // {
+            // InitializeBlockchain();
+        // }
+
+        // private void InitializeBlockchain()
+        // {
+            // chain = new List<Block>
+        // {
+            // CreateGenesisBlock()
+        // };
+        // }
+
+        // private Block CreateGenesisBlock()
+        // {
+            // return new Block
+            // {
+                // Index = 0,
+                // Timestamp = DateTime.Now,
+                // Transactions = new List<Transaction>(),
+                // PreviousHash = "0",
+                // Hash = CalculateHash(0, DateTime.Now, new List<Transaction>(), "0")
+            // };
+        // }
+
+        // public void AddBlock(List<Transaction> transactions)
+        // {
+            // var previousBlock = chain[chain.Count - 1];
+            // var newBlock = new Block
+            // {
+                // Index = previousBlock.Index + 1,
+                // Timestamp = DateTime.Now,
+                // Transactions = transactions,
+                // PreviousHash = previousBlock.Hash,
+                // Hash = CalculateHash(previousBlock.Index + 1, DateTime.Now, transactions, previousBlock.Hash)
+            // };
+            // chain.Add(newBlock);
+        // }
+
+        // public bool ValidateChain()
+        // {
+            // for (int i = 1; i < chain.Count; i++)
+            // {
+                // var currentBlock = chain[i];
+                // var previousBlock = chain[i - 1];
+
+                // if (currentBlock.Hash != CalculateHash(currentBlock.Index, currentBlock.Timestamp, currentBlock.Transactions, previousBlock.Hash))
+                // {
+                    // Console.WriteLine("Invalid Block: Hash mismatch");
+                    // return false;
+                // }
+
+                // if (currentBlock.PreviousHash != previousBlock.Hash)
+                // {
+                    // Console.WriteLine("Invalid Block: PreviousHash mismatch");
+                    // return false;
+                // }
+            // }
+
+            // return true;
+        // }
+
+        // private string CalculateHash(int index, DateTime timestamp, List<Transaction> transactions, string previousHash)
+        // {
+            // var input = $"{index}-{timestamp}-{string.Join(",", transactions)}-{previousHash}";
+            // using (var sha256 = SHA256.Create())
+            // {
+                // var bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
+                // return BitConverter.ToString(bytes).Replace("-", "").ToLower();
+            // }
+        // }
+    // }
+// }
