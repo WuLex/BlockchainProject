@@ -7,7 +7,7 @@
         xmlns:viewmodels="clr-namespace:CoinMarketCapApp.ViewModels" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="Crypto Market App" Height="600" Width="800">
+        Title="Crypto Market App" Height="600" Width="1000">
     <StackPanel  Margin="10">
         <DataGrid ItemsSource="{Binding PagedCoins.Items}" Name="coinDataGrid" AutoGenerateColumns="False" CanUserSortColumns="True">
             <DataGrid.Columns>
@@ -15,6 +15,10 @@
                 <DataGridTextColumn Header="价格" Width="Auto" Binding="{Binding Price}" SortMemberPath="Price"/>
                 <DataGridTextColumn Header="市值排名" Width="Auto" Binding="{Binding CmcRank}" SortMemberPath="CmcRank"/>
                 <DataGridTextColumn Header="代码符号" Width="Auto" Binding="{Binding Symbol}" SortMemberPath="Symbol"/>
+                <DataGridTextColumn Header="7天价格涨跌" Width="Auto" Binding="{Binding PercentChange7d, StringFormat={}{0:F2}\%}" SortMemberPath="PercentChange7d"/>
+                <DataGridTextColumn Header="30天价格涨跌" Width="Auto" Binding="{Binding PercentChange30d, StringFormat={}{0:F2}\%}" SortMemberPath="PercentChange30d"/>
+                <DataGridTextColumn Header="60天价格涨跌" Width="Auto" Binding="{Binding PercentChange60d, StringFormat={}{0:F2}\%}" SortMemberPath="PercentChange60d"/>
+                <DataGridTextColumn Header="90天价格涨跌" Width="Auto" Binding="{Binding PercentChange90d, StringFormat={}{0:F2}\%}" SortMemberPath="PercentChange90d"/>
                 <DataGridTextColumn Header="添加时间" Width="Auto" Binding="{Binding LaunchedDate, StringFormat='yyyy-MM-dd HH:mm:ss'}" SortMemberPath="LaunchedDate">
                     <!--<DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">

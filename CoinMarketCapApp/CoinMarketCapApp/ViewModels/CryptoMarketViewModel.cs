@@ -77,11 +77,79 @@ namespace CoinMarketCapApp.ViewModels
         // 加载数据的方法
         private void LoadData()
         {
-            ICoinmarketcapClient client = new CoinmarketcapClient("41947fa6-****-****-****-f316cfd33db3"); // 使用 Coinmarketcap 客户端
+            ICoinmarketcapClient client = new CoinmarketcapClient("41947fa6-*********-8815-f316cfd33db3"); // 使用 Coinmarketcap 客户端
 
             //指定要返回的结果数。使用此参数和“start”参数来确定您自己的分页大小。
             //默认是100,最大值为5000
             var currencyList = client.GetCurrencies(5000); // 获取加密货币数据
+
+            var symbolList = new string[] {
+                "BTC",
+                "ETH",
+                "BNB",
+                "SOL",
+                "XRP",
+                "ADA",
+                "DOGE",
+                "LINK",
+                "MATIC",
+                "SHIB",
+                "KAS",
+                "VET",
+                "XLM",
+                "INJ",
+                "TIA",
+                "ARB",
+                "ALGO",
+                "ORDI",
+                "SAND",
+                "FTM",
+                "1000SATS",
+                "CHZ",
+                "MANA",
+                "CFX",
+                "BONK",
+                "ROSE",
+                "SC",
+                "GALA",
+                "GALA",
+                "MANTA",
+                "FTT",
+                "WLD",
+                "PEPE",
+                "AGIX",
+                "SKL", 
+                "IOTX",
+                "ALT",
+                "ZIL",
+                "HOT",
+                "LRC",
+                "FLOKI",
+                "JST",
+                "ANKR",
+                "MEME",
+                "ONE",
+                "ACE",
+                "IOST",
+                "STRAX",
+                "CELR",
+                "SLP",
+                "DGB",
+                "RSR",
+                "MUBI",
+                "AGLD",
+                "QKC",
+                "SILLY",
+                "VIDT",
+                "ANALOS",
+                "SATS",
+                "AIMX",
+                "TRX",
+                "NFP",
+                "FIO",
+
+            };
+            //var currencyList = client.GetCurrencyBySymbolList(symbolList).Where(c =>  !string.IsNullOrEmpty(c.Rank));
             if (currencyList != null)
             {
                 foreach (var cryptoData in currencyList)
@@ -92,6 +160,10 @@ namespace CoinMarketCapApp.ViewModels
                         Price = cryptoData.Price,
                         Symbol = cryptoData.Symbol,
                         CmcRank= Convert.ToInt32(cryptoData.Rank.Trim()??"-1"),
+                        PercentChange7d= cryptoData.PercentChange7d,
+                        PercentChange30d= cryptoData.PercentChange30d,
+                        PercentChange60d = cryptoData.PercentChange60d,
+                        PercentChange90d = cryptoData.PercentChange90d,
                         LaunchedDate = cryptoData.DateAdded // 假设 API 响应中有 DateAdded 属性
                     };
 
@@ -233,7 +305,11 @@ namespace CoinMarketCapApp.ViewModels
                             worksheet.Cells[1, 2].Value = "价格";
                             worksheet.Cells[1, 3].Value = "市值排名";
                             worksheet.Cells[1, 4].Value = "代码符号";
-                            worksheet.Cells[1, 5].Value = "添加时间";
+                            worksheet.Cells[1, 5].Value = "7天涨跌百分比";
+                            worksheet.Cells[1, 6].Value = "30天涨跌百分比";
+                            worksheet.Cells[1, 7].Value = "60天涨跌百分比";
+                            worksheet.Cells[1, 8].Value = "90天涨跌百分比";
+                            worksheet.Cells[1, 9].Value = "添加时间";
                             // 设置列头字体加粗
                             worksheet.Cells[1, 1, 1, 5].Style.Font.Bold = true;
 
@@ -244,7 +320,11 @@ namespace CoinMarketCapApp.ViewModels
                                 worksheet.Cells[i + 2, 2].Value = Coins[i].Price;
                                 worksheet.Cells[i + 2, 3].Value = Coins[i].CmcRank;
                                 worksheet.Cells[i + 2, 4].Value = Coins[i].Symbol;
-                                worksheet.Cells[i + 2, 5].Value = Coins[i].LaunchedDate.ToString("yyyy-MM-dd HH:mm:ss");
+                                worksheet.Cells[i + 2, 5].Value = Coins[i].PercentChange7d;  //.ToString("P2"); 百分比无法排序
+                                worksheet.Cells[i + 2, 6].Value = Coins[i].PercentChange30d; //.ToString("P2");
+                                worksheet.Cells[i + 2, 7].Value = Coins[i].PercentChange60d; //.ToString("P2");
+                                worksheet.Cells[i + 2, 8].Value = Coins[i].PercentChange90d; //.ToString("P2");
+                                worksheet.Cells[i + 2, 9].Value = Coins[i].LaunchedDate.ToString("yyyy-MM-dd HH:mm:ss");
                                 // 添加更多属性
                             }
 

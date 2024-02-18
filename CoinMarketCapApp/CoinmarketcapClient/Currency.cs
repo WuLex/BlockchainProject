@@ -15,6 +15,15 @@ namespace NoobsMuc.Coinmarketcap.Client
         public decimal PercentChange1h { get; set; }
         public decimal PercentChange24h { get; set; }
         public decimal PercentChange7d { get; set; }
+
+        #region 添加价格变动字段
+        public double PercentChange30d { get; set; }
+        
+        public double PercentChange60d { get; set; }
+
+        public double PercentChange90d { get; set; }
+
+        #endregion
         public DateTime LastUpdated { get; set; }
 
         public DateTime DateAdded { get; set; }

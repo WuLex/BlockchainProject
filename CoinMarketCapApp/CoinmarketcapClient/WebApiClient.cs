@@ -76,6 +76,11 @@ namespace NoobsMuc.Coinmarketcap.Client
                     PercentChange1h = data.quote.CurrenyPriceInfo.percent_change_1h ?? 0,
                     PercentChange24h = data.quote.CurrenyPriceInfo.percent_change_24h ?? 0,
                     PercentChange7d = data.quote.CurrenyPriceInfo.percent_change_7d ?? 0,
+                    #region 添加价格变动
+                    PercentChange30d = data.quote.CurrenyPriceInfo.percent_change_30d ?? 0,
+                    PercentChange60d = data.quote.CurrenyPriceInfo.percent_change_60d ?? 0,
+                    PercentChange90d = data.quote.CurrenyPriceInfo.percent_change_90d ?? 0,
+                    #endregion
                     LastUpdated = data.quote.CurrenyPriceInfo.last_updated,
                     MarketCapConvert = data.quote.CurrenyPriceInfo.market_cap ?? 0,
                     ConvertCurrency = convert
@@ -108,6 +113,11 @@ namespace NoobsMuc.Coinmarketcap.Client
                     PercentChange1h = data.quote.CurrenyPriceInfo.percent_change_1h ?? 0,
                     PercentChange24h = data.quote.CurrenyPriceInfo.percent_change_24h ?? 0,
                     PercentChange7d = data.quote.CurrenyPriceInfo.percent_change_7d ?? 0,
+                    #region 添加价格变动
+                    PercentChange30d = data.quote.CurrenyPriceInfo.percent_change_30d ?? 0,
+                    PercentChange60d = data.quote.CurrenyPriceInfo.percent_change_60d ?? 0,
+                    PercentChange90d = data.quote.CurrenyPriceInfo.percent_change_90d ?? 0,
+                    #endregion
                     LastUpdated = data.quote.CurrenyPriceInfo.last_updated,
                     MarketCapConvert = data.quote.CurrenyPriceInfo.market_cap ?? 0,
                     ConvertCurrency = convert

@@ -82,9 +82,9 @@ namespace NoobsMuc.Coinmarketcap.Client
 
         #region in Symbol Call
 
-        public double percent_change_30d { get; set; }
-        public double percent_change_60d { get; set; }
-        public double percent_change_90d { get; set; }
+        public double? percent_change_30d { get; set; }
+        public double? percent_change_60d { get; set; }
+        public double? percent_change_90d { get; set; }
 
         #endregion in Symbol Call
 
