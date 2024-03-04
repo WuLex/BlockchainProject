@@ -1,53 +1,141 @@
-﻿using BlockChainAlgorithmProject.Common.DoublePayment;
+﻿using BlockChainAlgorithmProject.Common.BRC20Alg;
+using BlockChainAlgorithmProject.Common.DHTAlg;
+using BlockChainAlgorithmProject.Common.DoublePayment;
 using BlockChainAlgorithmProject.Common.MerkleTreeAlg;
 using BlockChainAlgorithmProject.Common.SCPAlg;
+using Org.BouncyCastle.Bcpg;
 using System.Xml.Linq;
 using Transaction = BlockChainAlgorithmProject.Common.DoublePayment.Transaction;
 
 
+#region DHT示例
+// 创建一个新的DHT实例
+DHT dht = new DHT();
+
+// 创建节点
+Node node1 = new Node("1");
+Node node2 = new Node("5");
+Node node3 = new Node("10");
+
+// 将节点添加到DHT中
+dht.AddNode(node1);
+dht.AddNode(node2);
+dht.AddNode(node3);
+
+// 将数据分发到节点
+dht.DistributeData("3", "Data 1");
+dht.DistributeData("7", "Data 2");
+dht.DistributeData("11", "Data 3");
+
+// 从节点中检索数据
+Console.WriteLine("Retrieved data for key '3': " + dht.RetrieveData("3"));
+Console.WriteLine("Retrieved data for key '7': " + dht.RetrieveData("7"));
+Console.WriteLine("Retrieved data for key '11': " + dht.RetrieveData("11"));
+#endregion
+
+#region BRC20代币
+//铭文：BRC20 代币的持有状态信息被保存在铭文中。
+//铭文是一个 JSON 格式的数据结构，它包含了代币的名称、符号、总量、持有者等信息。
+//铭文是使用了一种叫做 OP_RETURN 的操作码，该操作码可以将任意字符串数据存储在比特币区块链上。
+//因此，铭文的生成和解析需要依赖比特币网络。
+//链下服务：BRC20 代币的持有状态由链下服务维护。
+//链下服务负责解析铭文，并提供代币的转账、查询等功能。
+//链下服务通常使用 HTTP 协议与比特币网络进行交互。因此，链下服务的运行也需要依赖比特币网络。
+
+
+//// 创建一个 BRC20 代币
+//BRC20Token token = new BRC20Token("BRC20Test", "BRC", 10000);
+
+//// 铸造 100 个代币给地址 "0x12345678901234567890123456789012"
+//token.Mint("0x12345678901234567890123456789012", 100);
+
+//// 转账 50 个代币给地址 "0xabcdef0123456789abcdef0123456"
+//token.Transfer("0x12345678901234567890123456789012", "0xabcdef0123456789abcdef0123456", 50);
+
+//// 查询地址 "0x12345678901234567890123456789012" 的余额
+//uint balance = token.BalanceOf("0x12345678901234567890123456789012");
+
+//// 查询地址 "0xabcdef0123456789abcdef0123456" 的余额
+//uint balanceTwo = token.BalanceOf("0xabcdef0123456789abcdef0123456");
+//Console.WriteLine("地址1余额：{0}", balance);
+//Console.WriteLine("地址2余额：{0}", balanceTwo);
+
+
+//// 模拟铸造 100 个代币给地址 "0x12345678901234567890123456789012"
+//BRC20Token orditoken = new BRC20Token("BRC20Test", "BRC", 10000);
+//orditoken.Balances["0x12345678901234567890123456789012"] = 100;
+//string mint_script = orditoken.ToJSON();
+//Console.WriteLine("mint数据json：{0}", mint_script);
+
+//-------------------------------------------------------------------
+//// 查询 Alice 的余额
+//uint aliceBalance = BRC20Service.BalanceOf("alice");
+//Console.WriteLine($"Alice的余额：{aliceBalance}");
+
+//// 将 100 个代币转账给Bob
+//bool success = BRC20Service.Transfer("alice", "bob", 100);
+
+//if (success)
+//{
+//    Console.WriteLine("转账成功");
+
+//    // 查询Alice和Bob的余额
+//    aliceBalance = BRC20Service.BalanceOf("alice");
+//    Console.WriteLine($"Alice的余额：{aliceBalance}");
+
+//    uint bobBalance = BRC20Service.BalanceOf("bob");
+//    Console.WriteLine($"Bob的余额：{bobBalance}");
+//}
+//else
+//{
+//    Console.WriteLine("转账失败");
+//}
+
+#endregion
+
 #region 防止双重支付
-//模拟了一个简化的双花防范机制，
-//通过在交易中添加一个确认状态并在 AddBlock 方法中模拟确认来确保双花问题得到解决。
-//实际的区块链系统可能需要更复杂的机制和智能合约来处理这类问题。
+////模拟了一个简化的双花防范机制，
+////通过在交易中添加一个确认状态并在 AddBlock 方法中模拟确认来确保双花问题得到解决。
+////实际的区块链系统可能需要更复杂的机制和智能合约来处理这类问题。
 
 
-//每个交易都有一个唯一的标识符（通过 Guid.NewGuid().ToString() 生成）。
-//交易被添加到交易池中，并在创建新区块时从交易池中选择。在 AddTransaction 中，
-//我们检查交易池中是否已经存在具有相同标识符的交易，以防止双重支付。
-//请注意，实际应用中可能需要更多的机制来确保交易的安全性和唯一性。
+////每个交易都有一个唯一的标识符（通过 Guid.NewGuid().ToString() 生成）。
+////交易被添加到交易池中，并在创建新区块时从交易池中选择。在 AddTransaction 中，
+////我们检查交易池中是否已经存在具有相同标识符的交易，以防止双重支付。
+////请注意，实际应用中可能需要更多的机制来确保交易的安全性和唯一性。
 
-// 创建一个区块链实例
-var blockchain = new Blockchain();
+//// 创建一个区块链实例
+//var blockchain = new Blockchain();
 
-// 模拟一个有效的交易
-var validTransaction = new Transaction
-{
-    TransactionId = Guid.NewGuid().ToString(), // 生成唯一的交易标识符
-    Sender = "Alice",
-    Receiver = "Bob",
-    Amount = 10
-};
-// 将有效交易添加到交易池中
-blockchain.AddTransaction(validTransaction);
+//// 模拟一个有效的交易
+//var validTransaction = new Transaction
+//{
+//    TransactionId = Guid.NewGuid().ToString(), // 生成唯一的交易标识符
+//    Sender = "Alice",
+//    Receiver = "Bob",
+//    Amount = 10
+//};
+//// 将有效交易添加到交易池中
+//blockchain.AddTransaction(validTransaction);
 
-// 尝试模拟双重支付
-var doubleSpendTransaction = new Transaction
-{
-    TransactionId = Guid.NewGuid().ToString(), // 生成唯一的交易标识符
-    Sender = "Alice",
-    Receiver = "Charlie",
-    Amount = 5
-};
-// 将双重支付交易添加到交易池中
-blockchain.AddTransaction(doubleSpendTransaction);
-blockchain.AddTransaction(doubleSpendTransaction); // 尝试进行双重支付
+//// 尝试模拟双重支付
+//var doubleSpendTransaction = new Transaction
+//{
+//    TransactionId = Guid.NewGuid().ToString(), // 生成唯一的交易标识符
+//    Sender = "Alice",
+//    Receiver = "Charlie",
+//    Amount = 5
+//};
+//// 将双重支付交易添加到交易池中
+//blockchain.AddTransaction(doubleSpendTransaction);
+//blockchain.AddTransaction(doubleSpendTransaction); // 尝试进行双重支付
 
-// 将交易打包到区块中
-blockchain.AddBlock();
+//// 将交易打包到区块中
+//blockchain.AddBlock();
 
-// 验证区块链的有效性
-bool isValid = blockchain.ValidateChain();
-Console.WriteLine($"区块链是否有效: {isValid}");
+//// 验证区块链的有效性
+//bool isValid = blockchain.ValidateChain();
+//Console.WriteLine($"区块链是否有效: {isValid}");
 #endregion
 
 #region 实现双重支付漏洞并进行验证  Blockchain_ORINGIN.txt
@@ -218,5 +306,6 @@ Console.WriteLine($"区块链是否有效: {isValid}");
 //Console.WriteLine($"Password Matches: {passwordMatches}");
 
 #endregion Scrypt是一种用于密码学安全目的的哈希函数，旨在提供对抗特定类型的攻击，尤其是硬件攻击。
+
 
 Console.ReadKey();
