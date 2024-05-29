@@ -1,14 +1,10 @@
-﻿using BlockChainAlgorithmProject.Common.BRC20Alg;
-using BlockChainAlgorithmProject.Common.DHTAlg;
-using BlockChainAlgorithmProject.Common.DoublePayment;
-using BlockChainAlgorithmProject.Common.MerkleTreeAlg;
-using BlockChainAlgorithmProject.Common.SCPAlg;
-using Org.BouncyCastle.Bcpg;
-using System.Xml.Linq;
-using Transaction = BlockChainAlgorithmProject.Common.DoublePayment.Transaction;
-
+﻿using BlockChainAlgorithmProject.Common.DHTAlg;
+using BlockChainAlgorithmProject.Common.LightningNetwork;
+using BlockChainAlgorithmProject.Common.UTXOAlg;
+using UTXOTransaction = BlockChainAlgorithmProject.Common.UTXOAlg.Transaction;
 
 #region DHT示例
+
 // 创建一个新的DHT实例
 DHT dht = new DHT();
 
@@ -31,9 +27,11 @@ dht.DistributeData("11", "Data 3");
 Console.WriteLine("Retrieved data for key '3': " + dht.RetrieveData("3"));
 Console.WriteLine("Retrieved data for key '7': " + dht.RetrieveData("7"));
 Console.WriteLine("Retrieved data for key '11': " + dht.RetrieveData("11"));
-#endregion
+
+#endregion DHT示例
 
 #region BRC20代币
+
 //铭文：BRC20 代币的持有状态信息被保存在铭文中。
 //铭文是一个 JSON 格式的数据结构，它包含了代币的名称、符号、总量、持有者等信息。
 //铭文是使用了一种叫做 OP_RETURN 的操作码，该操作码可以将任意字符串数据存储在比特币区块链上。
@@ -41,7 +39,6 @@ Console.WriteLine("Retrieved data for key '11': " + dht.RetrieveData("11"));
 //链下服务：BRC20 代币的持有状态由链下服务维护。
 //链下服务负责解析铭文，并提供代币的转账、查询等功能。
 //链下服务通常使用 HTTP 协议与比特币网络进行交互。因此，链下服务的运行也需要依赖比特币网络。
-
 
 //// 创建一个 BRC20 代币
 //BRC20Token token = new BRC20Token("BRC20Test", "BRC", 10000);
@@ -59,7 +56,6 @@ Console.WriteLine("Retrieved data for key '11': " + dht.RetrieveData("11"));
 //uint balanceTwo = token.BalanceOf("0xabcdef0123456789abcdef0123456");
 //Console.WriteLine("地址1余额：{0}", balance);
 //Console.WriteLine("地址2余额：{0}", balanceTwo);
-
 
 //// 模拟铸造 100 个代币给地址 "0x12345678901234567890123456789012"
 //BRC20Token orditoken = new BRC20Token("BRC20Test", "BRC", 10000);
@@ -91,13 +87,13 @@ Console.WriteLine("Retrieved data for key '11': " + dht.RetrieveData("11"));
 //    Console.WriteLine("转账失败");
 //}
 
-#endregion
+#endregion BRC20代币
 
 #region 防止双重支付
+
 ////模拟了一个简化的双花防范机制，
 ////通过在交易中添加一个确认状态并在 AddBlock 方法中模拟确认来确保双花问题得到解决。
 ////实际的区块链系统可能需要更复杂的机制和智能合约来处理这类问题。
-
 
 ////每个交易都有一个唯一的标识符（通过 Guid.NewGuid().ToString() 生成）。
 ////交易被添加到交易池中，并在创建新区块时从交易池中选择。在 AddTransaction 中，
@@ -136,9 +132,11 @@ Console.WriteLine("Retrieved data for key '11': " + dht.RetrieveData("11"));
 //// 验证区块链的有效性
 //bool isValid = blockchain.ValidateChain();
 //Console.WriteLine($"区块链是否有效: {isValid}");
-#endregion
+
+#endregion 防止双重支付
 
 #region 实现双重支付漏洞并进行验证  Blockchain_ORINGIN.txt
+
 //// 创建一个区块链实例
 //var blockchain = new Blockchain();
 
@@ -162,8 +160,8 @@ Console.WriteLine("Retrieved data for key '11': " + dht.RetrieveData("11"));
 //// 验证区块链的有效性
 //bool isValid = blockchain.ValidateChain();
 //Console.WriteLine($"区块链是否有效: {isValid}");
-#endregion
 
+#endregion 实现双重支付漏洞并进行验证  Blockchain_ORINGIN.txt
 
 #region 模拟Stellar Consensus Protocol（SCP）的共识算法
 
@@ -209,8 +207,8 @@ Console.WriteLine("Retrieved data for key '11': " + dht.RetrieveData("11"));
 //{
 //    Console.WriteLine("未达成共识。交易被拒绝。");
 //}
-#endregion
 
+#endregion 模拟Stellar Consensus Protocol（SCP）的共识算法
 
 #region Merkle 树
 
@@ -233,7 +231,7 @@ Console.WriteLine("Retrieved data for key '11': " + dht.RetrieveData("11"));
 //Console.WriteLine("\nMerkle 树根:");
 //Console.WriteLine(merkleTree.GetRoot());
 
-#endregion MyRegion
+#endregion Merkle 树
 
 #region DAG算法实例
 
@@ -307,5 +305,90 @@ Console.WriteLine("Retrieved data for key '11': " + dht.RetrieveData("11"));
 
 #endregion Scrypt是一种用于密码学安全目的的哈希函数，旨在提供对抗特定类型的攻击，尤其是硬件攻击。
 
+#region UTXO系统的使用
+
+//// 创建一些初始的交易输出
+//var genesisTransaction = new BlockChainAlgorithmProject.Common.UTXOAlg.Transaction("0", new List<TransactionInput>(), new List<TransactionOutput>
+//        {
+//            new TransactionOutput(10, "Alice", "0")
+//        });
+
+//UTXO.AddOutput(genesisTransaction.Outputs[0]);
+
+//// Alice发送5个币给Bob
+//var transaction1 = new UTXOTransaction("1", new List<TransactionInput>
+//        {
+//            new TransactionInput
+//            {
+//                TransactionOutputId = genesisTransaction.Outputs[0].ParentTransactionId,
+//                UTXO = genesisTransaction.Outputs[0]
+//            }
+//        }, new List<TransactionOutput>
+//        {
+//            new TransactionOutput(5, "Bob", "1")
+//        });
+
+//UTXO.AddOutput(transaction1.Outputs[0]);
+
+//// Bob发送2个币给Charlie
+//var transaction2 = new UTXOTransaction("2", new List<TransactionInput>
+//        {
+//            new TransactionInput
+//            {
+//                TransactionOutputId = transaction1.Outputs[0].ParentTransactionId,
+//                UTXO = transaction1.Outputs[0]
+//            }
+//        }, new List<TransactionOutput>
+//        {
+//            new TransactionOutput(2, "Charlie", "2")
+//        });
+
+//UTXO.AddOutput(transaction2.Outputs[0]);
+
+//// 打印所有的UTXOs
+//var utxos = UTXO.GetUTXOs();
+//foreach (var utxo in utxos)
+//{
+//    Console.WriteLine($"UTXO: {utxo.Value} - Recipient: {utxo.Recipient}");
+//}
+
+#endregion
+
+#region 闪电网络
+// 模拟用户 Alice, Bob 和 Charlie
+User alice = new User("Alice");
+User bob = new User("Bob");
+User charlie = new User("Charlie");
+
+// Alice 发起 HTLC（哈希时间锁定合约）
+string secret = "super_secret_value";  // 预先设定的秘密值
+string hashLock = HashHelper.GenerateSHA256Hash(secret);  // 生成哈希锁定条件
+HTLC htlcToCharlie = new HTLC(charlie, 1.0m, hashLock);  // 创建 Alice -> Charlie 的 HTLC 对象
+HTLC htlcToBob = new HTLC(bob, 1.0m, hashLock);  // 创建 Charlie -> Bob 的 HTLC 对象
+
+// 模拟 Alice -> Charlie -> Bob 的多跳支付过程
+bool charlieVerified = charlie.VerifyHashLock(htlcToCharlie, hashLock);  // Charlie 验证哈希锁定条件
+
+if (charlieVerified)
+{
+    // Charlie 验证通过，创建 Charlie -> Bob 的 HTLC
+    bool bobVerified = bob.VerifyHashLock(htlcToBob, hashLock);  // Bob 验证哈希锁定条件
+
+    if (bobVerified)
+    {
+        // Bob 提取支付并公布秘密值
+        bob.Redeem(htlcToBob, secret);
+        Console.WriteLine($"Bob redeemed the HTLC with secret: {secret}");
+    }
+    else
+    {
+        Console.WriteLine("Bob failed to verify the HTLC.");
+    }
+}
+else
+{
+    Console.WriteLine("Charlie failed to verify the HTLC.");
+}
+#endregion
 
 Console.ReadKey();
